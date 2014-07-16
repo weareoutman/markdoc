@@ -74,4 +74,6 @@ $(function() {
 		preview.html(content);
 		localStorage.setItem(storageKey, value);
 	}
+
+	$(iframe.document).ready(render);
 });

@@ -1,1 +1,1 @@
-# [An online markdown editor](http://weareoutman.github.io/markdoc)
+# [An online markdown editor](http://weareoutman.github.io/markdoc/)
