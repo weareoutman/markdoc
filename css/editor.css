@@ -1,0 +1,41 @@
+html, body {
+  height: 100%;
+}
+.CodeMirror {
+  font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
+  height: 100%;
+  line-height: 1.42857143;
+}
+.container {
+  height: 100%;
+  position: relative;
+}
+.container:before,
+.container:after {
+  content: " ";
+  display: table;
+}
+.container:after {
+  clear: both;
+}
+.preview,
+.editor {
+  float: left;
+  height: 100%;
+  width: 50%;
+}
+.divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  bottom: 0;
+  width: 2px;
+  background-color: #ccc;
+}
+.preview {
+  overflow: hidden;
+}
+.preview iframe {
+  height: 100%;
+  width: 100%;
+}
