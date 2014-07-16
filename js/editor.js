@@ -6,9 +6,15 @@ marked.setOptions({
 });
 
 $(function() {
-	var mode = 'gfm',
+	var storageKey = 'markdoc',
+		mode = 'gfm',
 		editor = $('#editor'),
-		mirror = CodeMirror.fromTextArea(editor[0], {
+		storageValue = localStorage.getItem(storageKey);
+	if (storageValue) {
+		editor.val(storageValue);
+		setTimeout(render, 1);
+	}
+	var mirror = CodeMirror.fromTextArea(editor[0], {
 			mode: mode,
 			cursorHeight: 1,
 			// lineNumbers: true,
@@ -63,7 +69,9 @@ $(function() {
 	function render() {
 		getPreview();
 		// console.log(changed);
-		var content = marked(mirror.getDoc().getValue());
+		var value = mirror.getDoc().getValue(),
+			content = marked(value);
 		preview.html(content);
+		localStorage.setItem(storageKey, value);
 	}
 });
