@@ -125,4 +125,13 @@ $(function() {
 	$('#btn-html').click(function(){
 		download('mark.html', 'text/html;charset=utf-8');
 	});
+
+	try {
+		var isFileSaverSupported = !!new Blob;
+	} catch (e) {}
+	if (! Array.prototype.forEach) {
+		$('.tools').append(' 注意：你的浏览器不支持预览和下载，请使用 chrome 等现代浏览器。');
+	} else if (! isFileSaverSupported) {
+		$('.tools').append(' 注意：你的浏览器不支持下载，请使用 chrome 等现代浏览器。');
+	}
 });
