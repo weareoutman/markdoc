@@ -10,7 +10,7 @@ $(function() {
 		lastValue,
 		mode = 'gfm',
 		editor = $('#editor'),
-		storageValue = localStorage.getItem(storageKey);
+		storageValue = localStorage.getItem(storageKey) || $.trim($('#readme').html());
 	if (storageValue) {
 		editor.val(storageValue);
 	}
@@ -21,6 +21,7 @@ $(function() {
 			// lineWrapping: true,
 			styleActiveLine: true
 		});
+	mirror.focus();
 	var $iframe = $('iframe'),
 		iframeWin = $iframe[0].contentWindow,
 		$iframeWin = $(iframeWin),

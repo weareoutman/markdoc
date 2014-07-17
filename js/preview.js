@@ -9,6 +9,10 @@ $(function(){
 		render(_content);
 	}
 	parent.previewLoaded();
+	$(document).on('click', 'a', function(e){
+		e.preventDefault();
+		window.open(this.href);
+	});
 });
 window.render = function(content){
 	_content = content;

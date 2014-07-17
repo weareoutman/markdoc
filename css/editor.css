@@ -3,19 +3,30 @@ html, body {
 }
 body {
   padding-top: 32px;
+  padding-bottom: 32px;
 }
-.tools {
+.tools,
+.footer {
   height: 32px;
   position: absolute;
-  top: 0;
   left: 0;
   right: 0;
   text-align: center;
+}
+.tools {
+  top: 0;
   padding-top: 4px;
   border-bottom: 1px solid #ccc;
 }
 .tools button {
   font-size: 12px;
+}
+.footer {
+  color: #999;
+  font-size: 12px;
+  bottom: 0;
+  border-top: 1px solid #ccc;
+  line-height: 30px;
 }
 .container {
   height: 100%;
