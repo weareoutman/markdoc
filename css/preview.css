@@ -1,9 +1,10 @@
-body {
+#container {
   padding: 15px;
 }
 pre {
   border: 1px solid #ccc;
   border-radius: 4px;
+  display: block;
 }
 pre code {
   white-space: pre-wrap;
