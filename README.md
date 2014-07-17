@@ -22,3 +22,7 @@ function hello() {
 	var world;
 }
 ```
+
+## License
+
+MIT
