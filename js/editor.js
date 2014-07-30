@@ -1,3 +1,5 @@
+/* global marked, hljs, CodeMirror, saveAs */
+
 marked.setOptions({
 	langPrefix: 'hljs ',
 	highlight: function(code) {
@@ -7,6 +9,7 @@ marked.setOptions({
 
 $(function() {
 	var storageKey = 'markdoc',
+		storageNameKey = 'markdocName',
 		lastValue,
 		mode = 'gfm',
 		editor = $('#editor'),
@@ -77,7 +80,7 @@ $(function() {
 		localStorage.setItem(storageKey, value);
 	}
 
-	if (_previewLoaded) {
+	if (window._previewLoaded) {
 		render('preview load before');
 	} else {
 		window.previewLoaded = function(){
@@ -85,13 +88,26 @@ $(function() {
 		};
 	}
 
+	var inputName = $('#input-name');
+	var storageName = localStorage.getItem(storageNameKey);
+	if (storageName) {
+		inputName.val(storageName);
+	}
+	inputName.change(function(){
+		localStorage.setItem(storageNameKey, inputName.val());
+	});
+
+	function getName(ext) {
+		return (inputName.val() || 'mark') + ext;
+	}
+
 	$('#btn-md').click(function(){
 		var content = mirror.getDoc().getValue();
 		var blob = new Blob([content], {type: 'text/x-markdown;charset=utf-8'});
-		saveAs(blob, 'mark.md');
+		saveAs(blob, getName('.md'));
 	});
 
-	function download(name, type) {
+	function download(ext, type) {
 		var doc = iframeWin.document,
 			head = doc.head,
 			links = $(head).find('link'),
@@ -115,20 +131,21 @@ $(function() {
 			// Remove scripts
 			content = content.replace(/<script[^>]*>[\s\S]*?<\/script>\s*/g, '');
 			var blob = new Blob([content], {type: type});
-			saveAs(blob, name);
+			saveAs(blob, getName(ext));
 		});
 	}
 
 	$('#btn-doc').click(function(){
-		download('mark.doc', 'application/msword');
+		download('.doc', 'application/msword');
 	});
 
 	$('#btn-html').click(function(){
-		download('mark.html', 'text/html;charset=utf-8');
+		download('.html', 'text/html;charset=utf-8');
 	});
 
+	var isFileSaverSupported;
 	try {
-		var isFileSaverSupported = !!new Blob;
+		isFileSaverSupported = !!new Blob();
 	} catch (e) {}
 	if (! Array.prototype.forEach) {
 		$('.tools').append(' 注意：你的浏览器不支持预览和下载，请使用 chrome 等现代浏览器。');
